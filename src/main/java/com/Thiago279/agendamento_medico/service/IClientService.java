@@ -10,4 +10,6 @@ public interface IClientService {
     public List<Client> listAll();
 
     public Client registerClient(ClientRequestDTO dto);
+
+    public void delete(Long id);
 }

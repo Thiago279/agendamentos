@@ -1,15 +1,37 @@
 package com.Thiago279.agendamento_medico.entity;
 
+import com.Thiago279.agendamento_medico.entity.Schedule;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
-@Entity
-public class Client {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String nome;
-    private String email;
-    private String telefone;
 
+import java.util.List;
+
+@Entity
+@Table(name = "clients")
+public class Client {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false, length = 100)
+    private String name;
+
+    @Column(nullable = false, length = 100, unique = true)
+    private String email;
+
+    @Column(length = 20)
+    private String phoneNumber;
+
+    // Relacionamento 1:N com Agendamento (um cliente pode ter muitos agendamentos)
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    @JsonBackReference  // Impede a recursão (só serializa um lado)
+    private List<Schedule> schedules;
+
+    // Getters and Setters
 
     public Long getId() {
         return id;
@@ -19,12 +41,12 @@ public class Client {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {
@@ -35,19 +57,19 @@ public class Client {
         this.email = email;
     }
 
-    public String getTelefone() {
-        return telefone;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
-    public Client(){}
-    public Client(String nome, String email, String telefone) {
-        this.nome = nome;
-        this.email = email;
-        this.telefone = telefone;
+    public List<Schedule> getSchedules() {
+        return schedules;
     }
 
+    public void setSchedules(List<Schedule> schedules) {
+        this.schedules = schedules;
+    }
 }

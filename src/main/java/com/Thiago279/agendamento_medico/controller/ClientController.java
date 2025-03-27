@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("clients")
@@ -29,5 +30,11 @@ public class ClientController {
     public ResponseEntity<ClientRequestDTO> registerClient(@RequestBody ClientRequestDTO dto){
         service.registerClient(dto);
         return ResponseEntity.ok(dto);
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<Object> deleteClient(@PathVariable Long id ){
+        service.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }

@@ -1,29 +1,39 @@
 spring:
   application:
     name: agendamento-medico
+  #datasource:
+    #url: jdbc:h2:mem:testdb
+    #driver:
+      #driverClassName: org.h2.Driver
+    #username: sa
+    #password: password
+  #h2:
+    #console:
+      #enabled: true
   datasource:
-    url: jdbc:h2:mem:testdb
-    driver:
-      driverClassName: org.h2.Driver
-    username: sa
-    password: password
-  h2:
-    console:
-      enabled: true
+    url: jdbc:postgresql://localhost:5433/appointments
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      #ddl-auto: update
+      ddl-auto: none
   security:
     filter-dispatcher-types: ASYNC, ERROR, REQUEST
     web:
       security:
-        ignored: /swagger-ui/**,/v3/api-docs/**  # Ignora o Swagger para autenticação
+        ignored: /swagger-ui/**,/v3/api-docs/**  # Ignora o Swagger para autenticaï¿½ï¿½o
 
 springdoc:
   api-docs:
-    enabled: true  # Habilita a geração da documentação OpenAPI
+    enabled: true  # Habilita a geraï¿½ï¿½o da documentaï¿½ï¿½o OpenAPI
     path: /v3/api-docs  # URL para acessar os docs JSON
   swagger-ui:
     enabled: true  # Habilita a interface do Swagger UI
     path: /swagger-ui.html  # URL para acessar a UI do Swagger
-    operations-sorter: method  # Ordena os endpoints por método HTTP
-    tags-sorter: alpha  # Ordena os grupos de endpoints em ordem alfabética
+    operations-sorter: method  # Ordena os endpoints por mï¿½todo HTTP
+    tags-sorter: alpha  # Ordena os grupos de endpoints em ordem alfabï¿½tica
 
 

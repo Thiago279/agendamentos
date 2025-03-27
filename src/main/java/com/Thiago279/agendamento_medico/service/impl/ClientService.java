@@ -20,8 +20,16 @@ public class ClientService implements IClientService {
     }
 
     @Override
-    public Client registerClient( ClientRequestDTO dto) {
-        Client client = new Client(dto.getNome(), dto.getEmail(), dto.getTelefone());
+    public Client registerClient(ClientRequestDTO dto) {
+        Client client = new Client();
+        client.setName(dto.getName());
+        client.setEmail(dto.getEmail());
+        client.setPhoneNumber(dto.getPhoneNumber());
         return repository.save(client);
+    }
+
+    @Override
+    public void delete(Long id) {
+        repository.deleteById(id);
     }
 }

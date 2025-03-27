@@ -2,16 +2,16 @@ package com.Thiago279.agendamento_medico.dto;
 
 public class ClientRequestDTO {
 
-    private String nome;
+    private String name;
     private String email;
-    private String telefone;
+    private String phoneNumber;
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNome(String name) {
+        this.name = name;
     }
 
     public String getEmail() {
@@ -22,11 +22,11 @@ public class ClientRequestDTO {
         this.email = email;
     }
 
-    public String getTelefone() {
-        return telefone;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }
