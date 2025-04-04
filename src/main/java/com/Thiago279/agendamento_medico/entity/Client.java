@@ -22,7 +22,7 @@ public class Client {
     @Column(nullable = false, length = 100, unique = true)
     private String email;
 
-    @Column(length = 20)
+    @Column(length = 20, name = "phone_number")
     private String phoneNumber;
 
     // Relacionamento 1:N com Agendamento (um cliente pode ter muitos agendamentos)

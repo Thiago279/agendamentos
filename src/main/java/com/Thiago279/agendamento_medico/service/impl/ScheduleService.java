@@ -1,8 +1,10 @@
 package com.Thiago279.agendamento_medico.service.impl;
 
 import com.Thiago279.agendamento_medico.dto.ScheduleRequestDTO;
+import com.Thiago279.agendamento_medico.dto.ScheduleUpdateDTO;
 import com.Thiago279.agendamento_medico.entity.Client;
 import com.Thiago279.agendamento_medico.entity.Schedule;
+import com.Thiago279.agendamento_medico.exceptions.ClienteNaoEncontradoException;
 import com.Thiago279.agendamento_medico.repository.ClientRepository;
 import com.Thiago279.agendamento_medico.repository.ScheduleRepository;
 import com.Thiago279.agendamento_medico.service.IScheduleService;
@@ -30,7 +32,7 @@ public class ScheduleService implements IScheduleService {
     public Schedule save(ScheduleRequestDTO dto) {
         Schedule schedule = new Schedule();
         Client client = (clientRepository.findById(dto.clientId())
-                .orElseThrow(() -> new EntityNotFoundException("Cliente não encontrado com ID: " + dto.clientId())));
+                .orElseThrow(() -> new ClienteNaoEncontradoException("Cliente não encontrado com ID: " + dto.clientId())));
         schedule.setClient(client);
         schedule.setStartDate(dto.startDate());
         schedule.setEndDate(dto.startDate().plusMinutes(30));
@@ -38,4 +40,18 @@ public class ScheduleService implements IScheduleService {
     }
 
 
+    public void delete(Long id) {
+        repository.deleteById(id);
+        return;
+    }
+
+    public Schedule update(Long id, ScheduleUpdateDTO dto){
+        Schedule schedule = repository.findById(id).orElseThrow(
+                () -> new EntityNotFoundException("Agendamento não encontrado com ID: " + id)
+        );
+
+        schedule.setStartDate(dto.startDate());
+        schedule.setEndDate(dto.startDate().plusMinutes(30));
+        return repository.save(schedule);
+    }
 }
