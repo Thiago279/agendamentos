@@ -49,11 +49,6 @@ public class ScheduleController {
     @Operation(summary = "atualiza data de agendamento de consulta (id)", method = "PUT")
     @PutMapping("{id}")
     public ResponseEntity<Object> updateSchedule(@PathVariable Long id , @RequestBody @Valid ScheduleUpdateDTO schedule) {
-        try {
-            return ResponseEntity.ok(service.update(id, schedule));
-        } catch (EntityNotFoundException e) {
-            var erroDto= ErroResposta.respostaPadrao(e.getMessage());
-            return ResponseEntity.status(erroDto.status()).body(erroDto);
-        }
+        return ResponseEntity.ok(service.update(id, schedule));
     }
 }

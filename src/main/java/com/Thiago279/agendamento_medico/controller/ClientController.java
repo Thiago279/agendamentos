@@ -41,25 +41,16 @@ public class ClientController {
     @Operation(summary = "Registra cliente (nome, email , numero de telefone)", method = "POST")
     @PostMapping
     public ResponseEntity<Object> registerClient(@RequestBody ClientRequestDTO dto){
-        try{
         service.registerClient(dto);
         return ResponseEntity.ok(dto);
-    } catch (RegistroDuplicadoException e){
-            var erroDto = ErroResposta.conflito(e.getMessage());
-            return ResponseEntity.status(erroDto.status()).body(erroDto);
-        }
     }
 
     @Operation(summary = "Deleta cliente (id)", method = "DELETE")
     @DeleteMapping("{id}")
     public ResponseEntity<Object> deleteClient(@PathVariable Long id ){
-        try{
         service.delete(id);
         return ResponseEntity.noContent().build();
-    } catch (OperacaoNaoPermitidaException | ClienteNaoEncontradoException e){
-            var erroDto = ErroResposta.respostaPadrao(e.getMessage());
-            return ResponseEntity.status(erroDto.status()).body(erroDto);
-        }
+
     }
 
     @Operation(summary = "atualiza dados do cliente (id)", method = "PUT")
@@ -70,12 +61,7 @@ public class ClientController {
                     schema = @Schema(implementation = ClientUpdateDTO.class)
             )
     ) @Valid ClientUpdateDTO schedule) {
-        try {
-            return ResponseEntity.ok(service.update(id, schedule));
-        } catch (ClienteNaoEncontradoException | OperacaoNaoPermitidaException e) {
-            var erroDto= ErroResposta.respostaPadrao(e.getMessage());
-            return ResponseEntity.status(erroDto.status()).body(erroDto);
-        }
+        return ResponseEntity.ok(service.update(id, schedule));
     }
 
 }
