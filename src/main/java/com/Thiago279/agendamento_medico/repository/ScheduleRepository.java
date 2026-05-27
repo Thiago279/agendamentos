@@ -4,7 +4,7 @@ import com.Thiago279.agendamento_medico.entity.Client;
 import com.Thiago279.agendamento_medico.entity.Schedule;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ScheduleRepository extends JpaRepository <Schedule, Long> {
+public interface ScheduleRepository extends JpaRepository <Schedule, Integer> {
 
     public boolean existsByClient(Client client);
 }

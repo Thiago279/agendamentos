@@ -3,19 +3,16 @@ package com.Thiago279.agendamento_medico.service.impl;
 import com.Thiago279.agendamento_medico.dto.ClientRequestDTO;
 import com.Thiago279.agendamento_medico.dto.ClientUpdateDTO;
 import com.Thiago279.agendamento_medico.entity.Client;
-import com.Thiago279.agendamento_medico.entity.Schedule;
 import com.Thiago279.agendamento_medico.exceptions.ClienteNaoEncontradoException;
 import com.Thiago279.agendamento_medico.exceptions.OperacaoNaoPermitidaException;
 import com.Thiago279.agendamento_medico.repository.ClientRepository;
 import com.Thiago279.agendamento_medico.repository.ScheduleRepository;
 import com.Thiago279.agendamento_medico.service.IClientService;
 import com.Thiago279.agendamento_medico.validator.ClientValidator;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ClientService implements IClientService {
@@ -46,7 +43,7 @@ public class ClientService implements IClientService {
     }
 
     @Override
-    public void delete(Long id) {
+    public void delete(Integer id) {
         Client client = repository.findById(id).orElseThrow(
                 () ->
                 new ClienteNaoEncontradoException(
@@ -60,7 +57,7 @@ public class ClientService implements IClientService {
     }
 
     @Override
-    public Client update(Long id, ClientUpdateDTO dto) {
+    public Client update(Integer id, ClientUpdateDTO dto) {
         Client client = repository.findById(id).orElseThrow(
                 () -> new ClienteNaoEncontradoException("Cliente não encontrado com ID: " + id)
         );

@@ -12,7 +12,7 @@ public interface IClientService {
 
     public Client registerClient(ClientRequestDTO dto);
 
-    public void delete(Long id);
+    public void delete(Integer id);
 
-    public Client update(Long id, ClientUpdateDTO dto);
+    public Client update(Integer id, ClientUpdateDTO dto);
 }

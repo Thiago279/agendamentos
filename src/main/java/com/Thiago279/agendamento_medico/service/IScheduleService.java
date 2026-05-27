@@ -12,7 +12,7 @@ public interface IScheduleService {
 
     Schedule save(ScheduleRequestDTO schedule);
 
-    public void delete( Long id);
+    public void delete( Integer id);
 
-    public Schedule update(Long id, ScheduleUpdateDTO dto);
+    public Schedule update(Integer id, ScheduleUpdateDTO dto);
 }

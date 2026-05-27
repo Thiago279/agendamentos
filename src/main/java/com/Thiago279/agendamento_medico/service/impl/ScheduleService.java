@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ScheduleService implements IScheduleService {
@@ -40,12 +39,12 @@ public class ScheduleService implements IScheduleService {
     }
 
 
-    public void delete(Long id) {
+    public void delete(Integer id) {
         repository.deleteById(id);
         return;
     }
 
-    public Schedule update(Long id, ScheduleUpdateDTO dto){
+    public Schedule update(Integer id, ScheduleUpdateDTO dto){
         Schedule schedule = repository.findById(id).orElseThrow(
                 () -> new EntityNotFoundException("Agendamento não encontrado com ID: " + id)
         );
